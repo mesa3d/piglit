@@ -391,9 +391,9 @@ create_shader(GLenum type)
 		     !piglit_is_extension_supported("GL_OES_geometry_shader")))
 			return 0;
 	} else {
-		if (is_tessellation_type(type) &&
+		if (is_tessellation_type(type) && (required_glsl_version < 150 ||
 		    (required_glsl_version < 400 &&
-		     !piglit_is_extension_supported("GL_ARB_tessellation_shader")))
+		     !piglit_is_extension_supported("GL_ARB_tessellation_shader"))))
 			return 0;
 
 		/* Only support geometry shaders on desktop as introduced in
