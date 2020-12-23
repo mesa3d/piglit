@@ -363,8 +363,8 @@ gl_subtest_init(void)
 	glClearColor(0.0, 1.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	/* render a blue fullscreen green quad using
-	 * the imported z buffer
+	/* render a blue fullscreen quad using the
+	 * imported z buffer
 	 */
 	glEnable(GL_DEPTH_TEST);
 	glUseProgram(gl_rnd2fbo_prog);
