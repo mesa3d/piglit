@@ -72,7 +72,7 @@ piglit_init(int argc, char **argv)
 	loadTex();
 
 	glGetIntegerv(GL_ALPHA_BITS, &alpha_bits);
-	if (alpha_bits != 0)
+	if (alpha_bits == 0)
 		piglit_report_result(PIGLIT_SKIP);
 
 	piglit_ortho_projection(piglit_width, piglit_height, GL_FALSE);
