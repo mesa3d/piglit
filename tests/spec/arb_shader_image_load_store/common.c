@@ -141,6 +141,11 @@ upload_image_levels(const struct image_info img, unsigned num_levels,
         glGenTextures(1, &textures[unit]);
         glBindTexture(img.target->target, textures[unit]);
 
+        if (img.target->target != GL_TEXTURE_BUFFER) {
+            glTexParameteri(img.target->target, GL_TEXTURE_BASE_LEVEL, 0);
+            glTexParameteri(img.target->target, GL_TEXTURE_MAX_LEVEL, num_levels - 1);
+        }
+
         switch (img.target->target) {
         case GL_TEXTURE_1D:
                 for (l = 0; l < num_levels; ++l) {
@@ -301,6 +306,8 @@ upload_image_levels(const struct image_info img, unsigned num_levels,
 
                 glGenTextures(1, &tmp_tex);
                 glBindTexture(GL_TEXTURE_2D, tmp_tex);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 
                 if (img.target->target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY) {
                         glTexImage3DMultisample(GL_TEXTURE_2D_MULTISAMPLE_ARRAY,
@@ -462,6 +469,8 @@ download_image_levels(const struct image_info img, unsigned num_levels,
 
                 glGenTextures(1, &tmp_tex);
                 glBindTexture(GL_TEXTURE_2D, tmp_tex);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 
                 glTexImage2D(GL_TEXTURE_2D, 0, img.format->format,
                              grid.size.x, grid.size.y, 0,
